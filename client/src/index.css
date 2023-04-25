@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #7a7c84;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #494949;
+}
+
+/* Handle on Hover */
+::-webkit-scrollbar-track:hover {
+  background: #626266;
+}
+.css-t8hcva-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color: #b0b0b0!important;
+}
+/* CSS cho cái label của thằng MUI - nhớ dùng copy selector */
+/* .css-htde9x-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color: grey!important;
+}
+.css-q8iev8-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color: #b5b5b5!important;
+} */
+
+.datePicker{
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.css-1kx0l51 .MuiDataGrid-columnHeaders,.css-114hay9 .MuiDataGrid-columnHeaders,.css-ykhlbg .MuiDataGrid-columnHeaders,.css-1pdlfpu .MuiDataGrid-columnHeaders,.css-1h26hia .MuiDataGrid-columnHeaders,.css-169zady .MuiDataGrid-columnHeaders{
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
