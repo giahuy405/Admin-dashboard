@@ -5,9 +5,10 @@ import Header from "components/Header";
 import { DataGrid } from "@mui/x-data-grid";
 import { useQueryClient } from "react-query";
 import Modal from "@mui/material/Modal";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FlexBetween from "components/FlexBetween";
-import EditIcon from "@mui/icons-material/Edit";
+
 import ModalEditUser from "components/ModalEditUser";
 import ModalConfirmDelete from "components/ModalConfirmDelete";
 const Customers = () => {

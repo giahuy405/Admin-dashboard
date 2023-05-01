@@ -14,7 +14,8 @@ export const api = createApi({
     "Sales",
     "Admins",
     "UserPerformance",
-    "Dashboard"
+    "Dashboard",
+    "DeleteProduct"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -36,6 +37,14 @@ export const api = createApi({
         providesTags: ["DeleteUser"],
       }),
       invalidatesTags: ["Customers"], // dùng invalidate để fetch getCustomers
+    }),
+    deleteProduct: build.mutation({
+      query: (id) => ({
+        url: `client/delete-product/${id}`,
+        method: "DELETE",
+        providesTags: ["DeleteProduct"],
+      }),
+      invalidatesTags: ["Products"],  
     }),
     getTransaction: build.query({
       query: ({ page, pageSize, sort, search }) => ({
@@ -60,6 +69,8 @@ export const api = createApi({
       }),
       providesTags: ["Geography"],
     }),
+
+    // Sales 
     getSale: build.query({
       query: () => ({
         url: "sales/get-sale",
@@ -67,6 +78,9 @@ export const api = createApi({
       }),
       providesTags: ["Sales"],
     }),
+
+
+    // Management
     getAdmins: build.query({
       query: () => `management/admins`,
       providesTags: ["Admins"],
@@ -75,6 +89,9 @@ export const api = createApi({
       query: (id) => `management/performance/${id}`,
       providesTags: ["UserPerformance"],
     }),
+
+    
+    // Generals 
     getDashboard: build.query({
       query: () => `general/dashboard`,
       providesTags: ["Dashboard"],
@@ -93,5 +110,6 @@ export const {
   useGetSaleQuery,
   useGetAdminsQuery,
   useGetPerformanceQuery,
-  useGetDashboardQuery
+  useGetDashboardQuery,
+  useDeleteProductMutation
 } = api;

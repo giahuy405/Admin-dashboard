@@ -52,12 +52,28 @@ export const deletedCustomer = async (req, res) => {
       return failCode(res);
     }
 
-    successCode(res, "get customers successfully", "");
+    successCode(res, "deleted customers successfully", "");
   } catch (err) {
     errorCode(res);
   }
 };
+export const deletedProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
 
+    // Find the user by ID and delete it
+    const deletedUser = await Product.findByIdAndDelete(id);
+
+    // If the user doesn't exist, return a 404 response
+    if (!deletedUser) {
+      return failCode(res);
+    }
+
+    res.status(200).json('delete successfully');
+  } catch (err) {
+    errorCode(res);
+  }
+};
 // pagination
 export const getTransaction = async (req, res) => {
   try {

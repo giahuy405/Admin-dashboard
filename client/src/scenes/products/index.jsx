@@ -11,11 +11,17 @@ import {
   useTheme,
   useMediaQuery,
   Skeleton,
+  Menu,
+  MenuItem,
+  makeStyles,
 } from "@mui/material";
 import Header from "components/Header";
 import { useGetProductsQuery } from "state/api";
 import FlexBetween from "components/FlexBetween";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import ModalConfirmDelete from "components/ModalDeleteProd";
 const Product = ({
   _id,
   name,
@@ -25,9 +31,16 @@ const Product = ({
   category,
   supply,
   stat,
+  setOpen
 }) => {
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // Menu control
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isOpen = Boolean(anchorEl);
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
   return (
     <Card
@@ -46,7 +59,14 @@ const Product = ({
           >
             {category}
           </Typography>
-          <MoreHorizIcon />
+          <MoreHorizIcon
+            sx={{
+              ":hover": {
+                cursor: "pointer",
+              },
+            }}
+            onClick={handleClick}
+          />
         </FlexBetween>
         <Typography variant="h5" component="div">
           {name}
@@ -58,7 +78,21 @@ const Product = ({
 
         <Typography variant="body2">{description}</Typography>
       </CardContent>
-
+      {/* Menu edit */}
+      <Menu anchorEl={anchorEl} open={isOpen} onClose={handleClose}>
+        <MenuItem>
+          <EditIcon sx={{ marginRight: "6px" }} /> <span>Edit</span>
+        </MenuItem>
+        <MenuItem
+         onClick={()=>setOpen(true)}
+        >
+          <DeleteIcon
+           
+            sx={{ marginRight: "6px" }}
+          />{" "}
+          <span>Delete</span>
+        </MenuItem>
+      </Menu>
       <CardActions>
         <Button
           variant="outlined"
@@ -118,6 +152,16 @@ const Products = () => {
   const { data, isLoading } = useGetProductsQuery();
   const isNonMobile = useMediaQuery("(min-width: 1100px)");
 
+  // Modal control
+  const [open, setOpen] = useState(false);
+  const [paramsID, setParamsID] = useState(null);
+  const handleOpenModal = (paramsID) => {
+    setParamsID(paramsID);
+    setOpen(true);
+  };
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="PRODUCT" content="List of products." />
@@ -155,6 +199,7 @@ const Products = () => {
                 category={category}
                 supply={supply}
                 stat={stat}
+                setOpen={setOpen}
               />
             )
           )}
@@ -184,6 +229,13 @@ const Products = () => {
           </Box>
         </>
       )}
+      <ModalConfirmDelete
+        handleOpenModal={handleOpenModal}
+        handleCloseModal={handleCloseModal}
+        open={open}
+        setOpen={setOpen}
+        paramsID={paramsID}
+      />
     </Box>
   );
 };

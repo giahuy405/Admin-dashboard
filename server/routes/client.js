@@ -5,7 +5,8 @@ import {
   deletedCustomer,
   getTransaction,
   deleteTransaction,
-  getGeography
+  getGeography,
+  deletedProduct
 } from "../controllers/clients.js";
 
 const router = express.Router();
@@ -15,5 +16,6 @@ router.get("/customers", getCustomers);
 router.delete("/delete-customer/:id", deletedCustomer);
 router.get("/transaction", getTransaction);
 router.delete("/delete-transaction/:id", deleteTransaction);
+router.delete("/delete-product/:id", deletedProduct);
 router.get("/get-geography", getGeography);
 export default router;
